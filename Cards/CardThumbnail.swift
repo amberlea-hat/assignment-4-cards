@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct CardThumbnail: View {
+    let card: Card
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        RoundedRectangle(cornerRadius: 15)
+            .foregroundStyle(card.backgroundColor)
+            .frame(
+                width: Settings.thumbnailSize.width,
+                height: Settings.thumbnailSize.height
+            )
     }
 }
 
 #Preview {
-    CardThumbnail()
+    CardThumbnail(card: initialCards[0])
 }

@@ -13,16 +13,17 @@ struct SingleCardView: View {
     
     var body: some View {
         NavigationStack {
-            content
-                .modifier(CardToolbar(currentModal: $currentModal))
+            CardDetailView(card: $card)
+                .modifier(CardToolbar(
+                    currentModal: $currentModal,
+                    card: $card
+                )
+            )
         }
-    }
-
-    var content: some View {
-        card.backgroundColor
     }
 }
 
 #Preview {
-    SingleCardView(card: .constant(initialCards[0]))
+    @Previewable @State var card = initialCards[0]
+    SingleCardView(card: $card)
 }

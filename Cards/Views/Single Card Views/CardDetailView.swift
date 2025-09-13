@@ -8,11 +8,26 @@
 import SwiftUI
 
 struct CardDetailView: View {
+    @EnvironmentObject var store: CardStore
+    @Binding var card: Card
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            card.backgroundColor
+            ForEach($card.elements, id: \.id) { $element in
+                CardElementView(element: element)
+                    .resizableView(transform: $element.transform)
+                    .frame(
+                        width: element.transform.size.width,
+                        height: element.transform.size.height
+                    )
+            }
+        }
     }
 }
 
 #Preview {
-    CardDetailView()
+    @Previewable @State var card = initialCards[0]
+    CardDetailView(card: $card)
+        .environmentObject(CardStore(defaultData: true))
 }
